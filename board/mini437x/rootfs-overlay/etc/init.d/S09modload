@@ -1,0 +1,10 @@
+#!/bin/sh
+
+modprobe dwc3
+modprobe dwc3_omap
+modprobe bcmdhd
+echo 135 > /sys/class/gpio/export
+echo out > /sys/class/gpio/gpio135/direction
+echo  0 >  /sys/class/gpio/gpio135/value
+echo  1 >  /sys/class/gpio/gpio135/value
+brcm_patchram_plus  --enable_hci --no2bytes --tosleep 200000 --patchram /lib/firmware/bcm43438a1.hcd /dev/ttyS3 &
